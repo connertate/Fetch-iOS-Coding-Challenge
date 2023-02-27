@@ -15,6 +15,7 @@ struct DessertListView: View {
                 Text("Cake")
                 Text("Brownie")
                 Text("Cookies")
+                Text("s")
             }
             .navigationTitle("Desserts")
         }
