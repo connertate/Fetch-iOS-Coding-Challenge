@@ -14,6 +14,8 @@
 		44817C3529AD60E70018C3A1 /* Fetch_s_Favorite_DessertsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44817C3429AD60E70018C3A1 /* Fetch_s_Favorite_DessertsTests.swift */; };
 		44817C3F29AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44817C3E29AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITests.swift */; };
 		44817C4129AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44817C4029AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITestsLaunchTests.swift */; };
+		44EA087329AD65FB0061A9EB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA087229AD65FB0061A9EB /* NetworkController.swift */; };
+		44EA087529AD69790061A9EB /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA087429AD69790061A9EB /* Meal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		44817C3A29AD60E70018C3A1 /* Fetch's Favorite DessertsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fetch's Favorite DessertsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44817C3E29AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch_s_Favorite_DessertsUITests.swift; sourceTree = "<group>"; };
 		44817C4029AD60E70018C3A1 /* Fetch_s_Favorite_DessertsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch_s_Favorite_DessertsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		44EA087229AD65FB0061A9EB /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		44EA087429AD69790061A9EB /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				44817C2329AD60E60018C3A1 /* Fetch_s_Favorite_DessertsApp.swift */,
 				44817C2529AD60E60018C3A1 /* DessertListView.swift */,
+				44EA087229AD65FB0061A9EB /* NetworkController.swift */,
+				44EA087429AD69790061A9EB /* Meal.swift */,
 				44817C2729AD60E60018C3A1 /* Assets.xcassets */,
 				44817C2929AD60E60018C3A1 /* Preview Content */,
 			);
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44EA087529AD69790061A9EB /* Meal.swift in Sources */,
 				44817C2629AD60E60018C3A1 /* DessertListView.swift in Sources */,
 				44817C2429AD60E60018C3A1 /* Fetch_s_Favorite_DessertsApp.swift in Sources */,
+				44EA087329AD65FB0061A9EB /* NetworkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

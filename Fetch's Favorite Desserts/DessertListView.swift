@@ -8,16 +8,26 @@
 import SwiftUI
 
 struct DessertListView: View {
+    var networkController = NetworkController()
+    @State var desserts: [MealSummary] = []
     
     var body: some View {
         NavigationView {
-            List {
-                Text("Cake")
-                Text("Brownie")
-                Text("Cookies")
-                Text("s")
+            List(desserts, id: \.self) { dessert in
+                NavigationLink(destination: Text("A")) {
+                    Text(dessert.strMeal)
+                }
             }
             .navigationTitle("Desserts")
+        }
+        .onAppear{
+            Task {
+                var allDesserts = await networkController.fetchDesserts()
+                allDesserts.sort {
+                    $0.strMeal < $1.strMeal
+                }
+                desserts = allDesserts
+            }
         }
     }
 }
