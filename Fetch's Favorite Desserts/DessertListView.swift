@@ -15,7 +15,7 @@ struct DessertListView: View {
         NavigationView {
             List(desserts, id: \.self) { dessert in
                 NavigationLink(destination: Text("A")) {
-                    Text(dessert.strMeal)
+                    ListCell(meal: dessert)
                 }
             }
             .navigationTitle("Desserts")
@@ -28,6 +28,29 @@ struct DessertListView: View {
                 }
                 desserts = allDesserts
             }
+        }
+    }
+}
+
+struct ListCell: View {
+    var meal: MealSummary
+    
+    var body: some View {
+        HStack {
+            AsyncImage(
+                url: URL(string: meal.strMealThumb),
+                content: { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 40, maxHeight: 40)
+                        .cornerRadius(50)
+                },
+                placeholder: {
+                    ProgressView()
+                }
+            )
+            
+            Text(meal.strMeal)
         }
     }
 }
