@@ -19,7 +19,7 @@ class NetworkController {
         print("Fetching data!")
         do {
             let (data, _) = try await session.data(from: dessertListURL)
-            let desserts = try decoder.decode(Meals.self, from: data)
+            let desserts = try decoder.decode(MealSummaries.self, from: data)
             
             for x in desserts.meals {
                 print("\(x.strMeal)")
@@ -29,6 +29,27 @@ class NetworkController {
         } catch {
             print(error)
             return []
+        }
+    }
+    
+    func fetchDessert(withID id: String) async -> Meal? {
+//        print("Fetching single dessert with URL:")
+        
+        do {
+            let dessertURL = URL(string: dessertItemBaseURL + id)!
+            print(dessertItemBaseURL + id)
+            let (data, _) = try await session.data(from: dessertURL)
+//            print(String(data: data, encoding: .utf8))
+            let desserts = try decoder.decode(Meals.self, from: data)
+            
+//            for x in desserts.meals {
+//                print("\(x.strInstructions)")
+//            }
+            return desserts.meals.first ?? nil
+            
+        } catch {
+            print(error)
+            return nil
         }
     }
 }
