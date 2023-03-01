@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct DessertDetailView: View {
+//View to display more info for a selected dessert
+struct MealDetailView: View {
     
     @EnvironmentObject var vm: DessertsViewModel
     var mealSummary: MealSummary
     
     var body: some View {
         Form {
-            //Title and image
             MealTitleView(title: mealSummary.strMeal, imageURLString: mealSummary.strMealThumb)
             
             Section(header: Text("Ingredients")) {
@@ -28,20 +28,18 @@ struct DessertDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         //Load dessert info when view is presented
         .onAppear{
-            Task {
-                await vm.loadDessert(withID: mealSummary.idMeal)
+            Task(priority: .high) {
+                await vm.fetchDessert(withID: mealSummary.idMeal)
             }
         }
         //Alert error to warn user about network issues
-        .alert("Trouble connecting to the internet, please check your connection", isPresented: $vm.showNetworkErrorAlert) {
-            Button("Ok", role: .cancel) {
-                vm.showNetworkErrorAlert = false
-            }
+        .alert("Trouble loading data, please check your connection", isPresented: $vm.showNetworkErrorAlert) {
+            Button("Ok", role: .cancel) { vm.showNetworkErrorAlert = false }
         }
     }
 }
 
-//Top view to show dessert image and title
+//View to show dessert image and title
 struct MealTitleView: View {
     let title: String
     let imageURLString: String
@@ -69,6 +67,7 @@ struct MealTitleView: View {
     }
 }
 
+//Lists all ingredients, verbose solution but simple and easy
 struct IngredientsView: View {
     
     @EnvironmentObject var vm: DessertsViewModel
@@ -102,8 +101,7 @@ struct IngredientsView: View {
     }
 }
 
-//View for individual ingredient and measurement
-//Returns and emptyView if there is no respective ingredient
+//View for individual ingredient and measurement, returns and emptyView if there is no respective ingredient
 struct IngredientItemView: View {
     let ingredient: String?
     let measure: String?
@@ -123,6 +121,6 @@ struct IngredientItemView: View {
 
 struct DessertDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DessertDetailView(mealSummary: MealSummary(strMeal: "Pancakes", strMealThumb: "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg", idMeal: "52855"))
+        MealDetailView(mealSummary: MealSummary(strMeal: "Pancakes", strMealThumb: "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg", idMeal: "52855"))
     }
 }

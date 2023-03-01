@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct DessertListView: View {
-    @StateObject var vm = DessertsViewModel()
+    @EnvironmentObject var vm: DessertsViewModel
 
     var body: some View {
         NavigationView {
             List(vm.desserts, id: \.self) { dessert in
-                NavigationLink(destination: DessertDetailView(mealSummary: dessert)) {
+                NavigationLink(destination: MealDetailView(mealSummary: dessert)) {
                     Text(dessert.strMeal)
                 }
             }
             .navigationTitle("Desserts")
         }
-        .environmentObject(vm)
-        //Alert error to warn user about network issues
-        .alert("Trouble connecting to the internet, please check your connection", isPresented: $vm.showNetworkErrorAlert) {
+        //Alert error to warn user of network errors
+        .alert("Trouble loading data, please check your connection", isPresented: $vm.showNetworkErrorAlert) {
             Button("Ok", role: .cancel) {
                 vm.showNetworkErrorAlert = false
             }
