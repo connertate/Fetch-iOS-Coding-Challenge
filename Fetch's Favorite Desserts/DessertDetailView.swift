@@ -9,23 +9,8 @@ import SwiftUI
 
 struct DessertDetailView: View {
     
-    //The specific dessert we are looking at
+    @EnvironmentObject var vm: DessertsViewModel
     var mealSummary: MealSummary
-    var networkController = NetworkController()
-    
-    @State var meal: Meal? = nil
-    @State var showNetworkErrorAlert = false
-    
-    /// Concurrently load the full dessert item
-    func loadDessert() {
-        Task(priority: .high) {
-            do {
-                meal = try await networkController.fetchDessert(withID: mealSummary.idMeal)
-            } catch {
-                showNetworkErrorAlert = true
-            }
-        }
-    }
     
     var body: some View {
         Form {
@@ -33,46 +18,24 @@ struct DessertDetailView: View {
             MealTitleView(title: mealSummary.strMeal, imageURLString: mealSummary.strMealThumb)
             
             Section(header: Text("Ingredients")) {
-                Group {
-                    IngredientView(ingredient: meal?.strIngredient1, measure: meal?.strMeasure1)
-                    IngredientView(ingredient: meal?.strIngredient2, measure: meal?.strMeasure2)
-                    IngredientView(ingredient: meal?.strIngredient3, measure: meal?.strMeasure3)
-                    IngredientView(ingredient: meal?.strIngredient4, measure: meal?.strMeasure4)
-                    IngredientView(ingredient: meal?.strIngredient5, measure: meal?.strMeasure5)
-                    IngredientView(ingredient: meal?.strIngredient6, measure: meal?.strMeasure6)
-                    IngredientView(ingredient: meal?.strIngredient7, measure: meal?.strMeasure7)
-                    IngredientView(ingredient: meal?.strIngredient8, measure: meal?.strMeasure8)
-                    IngredientView(ingredient: meal?.strIngredient9, measure: meal?.strMeasure9)
-                    IngredientView(ingredient: meal?.strIngredient10, measure: meal?.strMeasure10)
-                }
-                
-                Group {
-                    IngredientView(ingredient: meal?.strIngredient11, measure: meal?.strMeasure11)
-                    IngredientView(ingredient: meal?.strIngredient12, measure: meal?.strMeasure12)
-                    IngredientView(ingredient: meal?.strIngredient13, measure: meal?.strMeasure13)
-                    IngredientView(ingredient: meal?.strIngredient14, measure: meal?.strMeasure14)
-                    IngredientView(ingredient: meal?.strIngredient15, measure: meal?.strMeasure15)
-                    IngredientView(ingredient: meal?.strIngredient16, measure: meal?.strMeasure16)
-                    IngredientView(ingredient: meal?.strIngredient17, measure: meal?.strMeasure17)
-                    IngredientView(ingredient: meal?.strIngredient18, measure: meal?.strMeasure18)
-                    IngredientView(ingredient: meal?.strIngredient19, measure: meal?.strMeasure19)
-                    IngredientView(ingredient: meal?.strIngredient20, measure: meal?.strMeasure20)
-                }
+                IngredientsView()
             }
             
             Section(header: Text("Directions")) {
-                Text(meal?.strInstructions ?? "")
+                Text(vm.meal?.strInstructions ?? "")
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         //Load dessert info when view is presented
         .onAppear{
-            loadDessert()
+            Task {
+                await vm.loadDessert(withID: mealSummary.idMeal)
+            }
         }
         //Alert error to warn user about network issues
-        .alert("Trouble connecting to the internet, please check your connection", isPresented: $showNetworkErrorAlert) {
+        .alert("Trouble connecting to the internet, please check your connection", isPresented: $vm.showNetworkErrorAlert) {
             Button("Ok", role: .cancel) {
-                showNetworkErrorAlert = false
+                vm.showNetworkErrorAlert = false
             }
         }
     }
@@ -106,9 +69,42 @@ struct MealTitleView: View {
     }
 }
 
+struct IngredientsView: View {
+    
+    @EnvironmentObject var vm: DessertsViewModel
+    
+    var body: some View {
+        Group {
+            IngredientItemView(ingredient: vm.meal?.strIngredient1, measure: vm.meal?.strMeasure1)
+            IngredientItemView(ingredient: vm.meal?.strIngredient2, measure: vm.meal?.strMeasure2)
+            IngredientItemView(ingredient: vm.meal?.strIngredient3, measure: vm.meal?.strMeasure3)
+            IngredientItemView(ingredient: vm.meal?.strIngredient4, measure: vm.meal?.strMeasure4)
+            IngredientItemView(ingredient: vm.meal?.strIngredient5, measure: vm.meal?.strMeasure5)
+            IngredientItemView(ingredient: vm.meal?.strIngredient6, measure: vm.meal?.strMeasure6)
+            IngredientItemView(ingredient: vm.meal?.strIngredient7, measure: vm.meal?.strMeasure7)
+            IngredientItemView(ingredient: vm.meal?.strIngredient8, measure: vm.meal?.strMeasure8)
+            IngredientItemView(ingredient: vm.meal?.strIngredient9, measure: vm.meal?.strMeasure9)
+            IngredientItemView(ingredient: vm.meal?.strIngredient10, measure: vm.meal?.strMeasure10)
+        }
+        
+        Group {
+            IngredientItemView(ingredient: vm.meal?.strIngredient11, measure: vm.meal?.strMeasure11)
+            IngredientItemView(ingredient: vm.meal?.strIngredient12, measure: vm.meal?.strMeasure12)
+            IngredientItemView(ingredient: vm.meal?.strIngredient13, measure: vm.meal?.strMeasure13)
+            IngredientItemView(ingredient: vm.meal?.strIngredient14, measure: vm.meal?.strMeasure14)
+            IngredientItemView(ingredient: vm.meal?.strIngredient15, measure: vm.meal?.strMeasure15)
+            IngredientItemView(ingredient: vm.meal?.strIngredient16, measure: vm.meal?.strMeasure16)
+            IngredientItemView(ingredient: vm.meal?.strIngredient17, measure: vm.meal?.strMeasure17)
+            IngredientItemView(ingredient: vm.meal?.strIngredient18, measure: vm.meal?.strMeasure18)
+            IngredientItemView(ingredient: vm.meal?.strIngredient19, measure: vm.meal?.strMeasure19)
+            IngredientItemView(ingredient: vm.meal?.strIngredient20, measure: vm.meal?.strMeasure20)
+        }
+    }
+}
+
 //View for individual ingredient and measurement
 //Returns and emptyView if there is no respective ingredient
-struct IngredientView: View {
+struct IngredientItemView: View {
     let ingredient: String?
     let measure: String?
     
