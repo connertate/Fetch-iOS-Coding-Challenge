@@ -11,11 +11,12 @@ import SwiftUI
 struct MealDetailView: View {
     
     @EnvironmentObject var vm: DessertsViewModel
+    //Meal summary item is passed to this view so we can instantly display title
     var mealSummary: MealSummary
     
     var body: some View {
         Form {
-            MealTitleView(title: mealSummary.strMeal, imageURLString: mealSummary.strMealThumb)
+            MealTitleView(dessert: mealSummary)
             
             Section(header: Text("Ingredients")) {
                 IngredientsView()
@@ -41,17 +42,16 @@ struct MealDetailView: View {
 
 //View to show dessert image and title
 struct MealTitleView: View {
-    let title: String
-    let imageURLString: String
+    let dessert: MealSummary
     
     var body: some View {
         VStack {
-            Text(title)
+            Text(dessert.strMeal)
                 .font(.title2.weight(.semibold))
                 .padding(.top, 10)
             
             AsyncImage(
-                url: URL(string: imageURLString),
+                url: URL(string: dessert.strMealThumb),
                 content: { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
@@ -67,7 +67,7 @@ struct MealTitleView: View {
     }
 }
 
-//Lists all ingredients, verbose solution but simple and easy
+//Lists all ingredients, verbose solution but simple
 struct IngredientsView: View {
     
     @EnvironmentObject var vm: DessertsViewModel

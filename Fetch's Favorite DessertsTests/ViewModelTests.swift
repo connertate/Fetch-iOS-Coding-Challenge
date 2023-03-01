@@ -10,6 +10,7 @@ import XCTest
 
 //All tests for the ViewModel
 final class ViewModelTests: XCTestCase {
+    
     private var sut: DessertsViewModel!
     
     override func setUpWithError() throws {

@@ -9,6 +9,7 @@ import XCTest
 
 //All tests for the NetworkController
 final class NetworkControllerTests: XCTestCase {
+    
     private var sut: NetworkController!
 
     override func setUpWithError() throws {

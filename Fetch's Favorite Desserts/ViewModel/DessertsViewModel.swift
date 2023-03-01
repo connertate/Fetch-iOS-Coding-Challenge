@@ -11,7 +11,9 @@ class DessertsViewModel: ObservableObject {
     
     private let networkController = NetworkController()
     
+    //Array of all dessert items
     @Published var desserts: [MealSummary] = []
+    //Optional to hold loaded data for user selected dessert
     @Published var dessert: Meal? = nil
     @Published var showNetworkErrorAlert = false
     
