@@ -12,7 +12,7 @@ class DessertsViewModel: ObservableObject {
     private let networkController = NetworkController()
     
     @Published var desserts: [MealSummary] = []
-    @Published var meal: Meal? = nil
+    @Published var dessert: Meal? = nil
     @Published var showNetworkErrorAlert = false
     
     init() {
@@ -37,7 +37,7 @@ class DessertsViewModel: ObservableObject {
     func fetchDessert(withID id: String) async {
         do {
             let fullMeal = try await networkController.fetchDessert(withID: id)
-            await MainActor.run { meal = fullMeal }
+            await MainActor.run { dessert = fullMeal }
         } catch {
             await MainActor.run { showNetworkErrorAlert = true }
         }

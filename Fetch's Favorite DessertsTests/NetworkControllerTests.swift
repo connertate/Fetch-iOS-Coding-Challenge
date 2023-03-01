@@ -7,6 +7,7 @@
 
 import XCTest
 
+//All tests for the NetworkController
 final class NetworkControllerTests: XCTestCase {
     private var sut: NetworkController!
 
@@ -18,15 +19,32 @@ final class NetworkControllerTests: XCTestCase {
         sut = nil
     }
 
+    //Network controller returns array of meal summaries
+    func test_mealSummaryRequest_returnsArrayOfMealSummaries() async {
+        let emptyArray: [MealSummary] = []
+        var allDesserts: [MealSummary] = []
+        
+        
+        do {
+            allDesserts = try await sut.fetchDesserts()
+        } catch {
+            
+        }
+        
+        XCTAssertNotEqual(allDesserts, emptyArray)
+    }
+    
     //Network controller throws an error when asking for an empty mealID
     func test_emptyMealIDRequest_returnsError() async {
         var errorThrown = false
         let expected = true
+        
         do {
             _ = try await sut.fetchDessert(withID: "")
         } catch {
             errorThrown = true
         }
+        
         XCTAssertEqual(errorThrown, expected)
     }
     
