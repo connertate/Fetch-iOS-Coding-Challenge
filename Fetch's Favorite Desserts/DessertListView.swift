@@ -10,47 +10,39 @@ import SwiftUI
 struct DessertListView: View {
     var networkController = NetworkController()
     @State var desserts: [MealSummary] = []
+    @State var showNetworkErrorAlert = false
+    
+    
+    /// Concurrently fetches, sorts, and stores mealSummary items in the desserts array 
+    func loadDesserts() {
+        Task(priority: .high) {
+            do {
+                let allDesserts = try await networkController.fetchDesserts()
+                desserts = allDesserts.sorted { $0.strMeal < $1.strMeal }
+            } catch {
+                showNetworkErrorAlert = true
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
             List(desserts, id: \.self) { dessert in
                 NavigationLink(destination: DessertDetailView(mealSummary: dessert)) {
-                    ListCell(meal: dessert)
+                    Text(dessert.strMeal)
                 }
             }
             .navigationTitle("Desserts")
         }
+        //Load desserts when app is launched
         .onAppear{
-            Task {
-                var allDesserts = await networkController.fetchDesserts()
-                allDesserts.sort {
-                    $0.strMeal < $1.strMeal
-                }
-                desserts = allDesserts
-            }
+            loadDesserts()
         }
-    }
-}
-
-struct ListCell: View {
-    var meal: MealSummary
-    
-    var body: some View {
-        HStack {
-//            AsyncImage(
-//                url: URL(string: meal.strMealThumb),
-//                content: { image in
-//                    image.resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(maxWidth: 40, maxHeight: 40)
-//                        .cornerRadius(50)
-//                },
-//                placeholder: {
-//                    ProgressView()
-//                }
-//            )
-            
-            Text(meal.strMeal)
+        //Alert error to warn user about network issues
+        .alert("Trouble connecting to the internet, please check your connection", isPresented: $showNetworkErrorAlert) {
+            Button("Ok", role: .cancel) {
+                showNetworkErrorAlert = false
+            }
         }
     }
 }

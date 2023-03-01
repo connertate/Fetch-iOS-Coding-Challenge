@@ -7,22 +7,27 @@
 
 import Foundation
 
+//Top level JSON for dessert list
 struct MealSummaries: Codable {
     let meals: [MealSummary]
 }
 
+//Summary of dessert item, displayed in list
 struct MealSummary: Codable, Hashable {
     let strMeal: String
     let strMealThumb: String
     let idMeal: String
 }
 
+//Top level JSON for full dessert item
 struct Meals: Codable {
     let meals: [Meal]
 }
 
+//Full dessert item, displayed in detail view
 struct Meal: Codable, Hashable {
     let strInstructions: String
+    
     let strIngredient1: String?
     let strIngredient2: String?
     let strIngredient3: String?

@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		44287CCA29AE802400D1FFBA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4462BE4129AEEF43000945A2 /* Fetch-s-Favorite-Desserts-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Fetch-s-Favorite-Desserts-Info.plist"; sourceTree = SOURCE_ROOT; };
 		44817C2029AD60E60018C3A1 /* Fetch's Favorite Desserts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fetch's Favorite Desserts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44817C2329AD60E60018C3A1 /* Fetch_s_Favorite_DessertsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch_s_Favorite_DessertsApp.swift; sourceTree = "<group>"; };
 		44817C2529AD60E60018C3A1 /* DessertListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertListView.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		44817C2229AD60E60018C3A1 /* Fetch's Favorite Desserts */ = {
 			isa = PBXGroup;
 			children = (
+				4462BE4129AEEF43000945A2 /* Fetch-s-Favorite-Desserts-Info.plist */,
 				44817C2329AD60E60018C3A1 /* Fetch_s_Favorite_DessertsApp.swift */,
 				44817C2529AD60E60018C3A1 /* DessertListView.swift */,
 				44EA087829AD76810061A9EB /* DessertDetailView.swift */,
@@ -436,9 +438,9 @@
 				DEVELOPMENT_TEAM = 9S3B5R96Y2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Fetch-s-Favorite-Desserts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Fetch's Desserts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -468,9 +470,9 @@
 				DEVELOPMENT_TEAM = 9S3B5R96Y2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Fetch-s-Favorite-Desserts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Fetch's Desserts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

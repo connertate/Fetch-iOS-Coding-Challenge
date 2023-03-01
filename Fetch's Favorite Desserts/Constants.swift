@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Project wide UI constants
 struct Constants {
     static let cornerRadius: CGFloat = 10.0
  }
