@@ -28,7 +28,7 @@ class DessertsViewModel: ObservableObject {
     func fetchDesserts() async {
         do {
             let allDesserts = try await networkController.fetchDesserts()
-            await MainActor.run { desserts = allDesserts }
+            await MainActor.run {  desserts = allDesserts }
         } catch {
             await MainActor.run { showNetworkErrorAlert = true }
         }
